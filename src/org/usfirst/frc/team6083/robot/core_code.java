@@ -10,13 +10,13 @@ public class core_code {
     static Spark motor2 = new Spark(1);
     static SmartDashboard dash = new SmartDashboard();
     static ADXRS450_Gyro Gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-    static double angle=0,x=0,curr=0;
+    static double angle=0,x=0.01,curr=0;
     
     public static void init(){
         Gyro.reset();
         Gyro.calibrate();
         SmartDashboard.putNumber("angle", 0);
-        SmartDashboard.putNumber("x", 0);
+        SmartDashboard.putNumber("x", x);
     }
     public static void rotate(double to){
     	do{
