@@ -84,28 +84,34 @@ public class Robot extends IterativeRobot {
         	do{
         		angle=angle-360;
         	}while(angle>0);
-        }else if(angle <=-360){
+        }
+        else if(angle <=-360){
         	do{
         		angle=angle+360;
         	}while(angle<0);
-        }
+        }//make the error angle not exceed 360
+        
         if(angle<=-5 && angle >=-355){
         	if(angle*x <=-0.3){
         		motor2.set(-0.3);//-  turn right
         		motor1.set(-0.3);
-        	}else{
+        	}//limit the speed
+        	else{
         		motor2.set(angle*x);
             	motor1.set(angle*x);
         	}
-        }else if(angle >=5 && angle <=355){
+        }
+        else if(angle >=5 && angle <=355){
         	if(angle*x >= 0.3){
         		motor1.set(0.3);
         		motor2.set(0.3);
-        	}else{
+        	}//limit the speed
+        	else{
         	motor1.set(angle*x);
         	motor2.set(angle*x);
         	}
-        }else{
+        }
+        else{
         	motor1.set(0);
         	motor2.set(0);
         }
