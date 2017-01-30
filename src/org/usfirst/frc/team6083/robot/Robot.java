@@ -61,7 +61,9 @@ public class Robot extends IterativeRobot {
             break;
     	case defaultAuto:
     	default:
-    	//Put default auto code here
+    		core_code.rotate(180);
+    		core_code.rotate(-90);
+    		core_code.rotate(180);
             break;
     	}
     }
