@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class core_code {
-    static Spark motor1=new Spark(0);
-    static Spark motor2=new Spark(1);
+    static Spark motor1 = new Spark(0);
+    static Spark motor2 = new Spark(1);
     static SmartDashboard dash = new SmartDashboard();
     static ADXRS450_Gyro Gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-    static double angle=0,x=0;
+    static double angle=0,x=0,curr=0;
     
     public static void init(){
         Gyro.reset();
@@ -18,10 +18,10 @@ public class core_code {
         SmartDashboard.putNumber("angle", 0);
         SmartDashboard.putNumber("x", 0);
     }
-    public static void setrobotangle(double to){
+    public static void rotate(double to){
     	do{
     		
-    	}while(loop(to));
+    	}while(loop(to+curr));
     }
     private static boolean loop(double to){
     	//left is - right is +
