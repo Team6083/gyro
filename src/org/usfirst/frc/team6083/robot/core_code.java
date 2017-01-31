@@ -11,7 +11,7 @@ public class core_code {
     static SmartDashboard dash = new SmartDashboard();
     static ADXRS450_Gyro Gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
     static double angle=0,x=0.01,curr=0;
-    static double error_range=3;
+    static double error_range=3,max_speed=0.25;
     
     public static void init(){
         Gyro.reset();
@@ -19,9 +19,11 @@ public class core_code {
         SmartDashboard.putNumber("angle", 0);
         SmartDashboard.putNumber("x", x);
         SmartDashboard.putNumber("error_range", error_range);
+        SmartDashboard.putNumber("max_speed",max_speed);
     }
     public static void rotate(double to){
     	error_range = SmartDashboard.getNumber("error_range");
+    	max_speed = SmartDashboard.getNumber("max_speed");
     	to = curr+to;
     	do{
     		
@@ -47,9 +49,9 @@ public class core_code {
         }//make the error angle not exceed 360
         
         if(angle<=-error_range && angle >=-(360-error_range)){
-        	if(angle*x <=-0.3){
-        		motor2.set(-0.3);//-  turn right
-        		motor1.set(-0.3);
+        	if(angle*x <=-max_speed){
+        		motor2.set(-max_speed);//-  turn right
+        		motor1.set(-max_speed);
         	}//limit the speed
         	else{
         		motor2.set(angle*x);
@@ -57,9 +59,9 @@ public class core_code {
         	}
         }
         else if(angle >=error_range && angle <=(360-error_range)){
-        	if(angle*x >= 0.3){
-        		motor1.set(0.3);
-        		motor2.set(0.3);
+        	if(angle*x >= max_speed){
+        		motor1.set(max_speed);
+        		motor2.set(max_speed);
         	}//limit the speed
         	else{
         	motor1.set(angle*x);
