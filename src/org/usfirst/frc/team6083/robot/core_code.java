@@ -19,9 +19,13 @@ public class core_code {
         SmartDashboard.putNumber("x", x);
     }
     public static void rotate(double to){
+    	to = curr+to;
     	do{
     		
-    	}while(loop(to+curr));
+    	}while(loop(to));
+    	
+    	curr = to;
+    	
     }
     private static boolean loop(double to){
     	//left is - right is +
@@ -67,5 +71,9 @@ public class core_code {
         
         SmartDashboard.putNumber("angle", angle);
         return re;
+    }
+    
+    private static void dashbaord(){
+    	
     }
 }

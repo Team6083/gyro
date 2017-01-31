@@ -49,6 +49,8 @@ public class Robot extends IterativeRobot {
     	autoSelected = (String) chooser.getSelected();
 //		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 		System.out.println("Auto selected: " + autoSelected);
+		core_code.rotate(180);
+		core_code.rotate(-90);
     }
 
     /**
@@ -61,9 +63,7 @@ public class Robot extends IterativeRobot {
             break;
     	case defaultAuto:
     	default:
-    		core_code.rotate(180);
-    		core_code.rotate(-90);
-    		core_code.rotate(180);
+    		
             break;
     	}
     }
