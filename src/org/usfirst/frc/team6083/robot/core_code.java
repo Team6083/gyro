@@ -11,14 +11,17 @@ public class core_code {
     static SmartDashboard dash = new SmartDashboard();
     static ADXRS450_Gyro Gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
     static double angle=0,x=0.01,curr=0;
+    static double error_range=3;
     
     public static void init(){
         Gyro.reset();
         Gyro.calibrate();
         SmartDashboard.putNumber("angle", 0);
         SmartDashboard.putNumber("x", x);
+        SmartDashboard.putNumber("error_range", error_range);
     }
     public static void rotate(double to){
+    	error_range = SmartDashboard.getNumber("error_range");
     	to = curr+to;
     	do{
     		
@@ -43,7 +46,7 @@ public class core_code {
         	}while(angle<0);
         }//make the error angle not exceed 360
         
-        if(angle<=-5 && angle >=-355){
+        if(angle<=-error_range && angle >=-(360-error_range)){
         	if(angle*x <=-0.3){
         		motor2.set(-0.3);//-  turn right
         		motor1.set(-0.3);
@@ -53,7 +56,7 @@ public class core_code {
             	motor1.set(angle*x);
         	}
         }
-        else if(angle >=5 && angle <=355){
+        else if(angle >=error_range && angle <=(360-error_range)){
         	if(angle*x >= 0.3){
         		motor1.set(0.3);
         		motor2.set(0.3);
