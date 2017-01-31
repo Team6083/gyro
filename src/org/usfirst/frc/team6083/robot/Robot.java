@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot {
     final String customAuto = "My Auto";
     String autoSelected;
     SendableChooser chooser;
+    double rotate_angle = 0;
     
 	
     /**
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
         core_code.init();
+        SmartDashboard.putNumber("rotate_angle", rotate_angle);
     }
     
 	/**
@@ -50,7 +52,6 @@ public class Robot extends IterativeRobot {
 //		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
 		System.out.println("Auto selected: " + autoSelected);
 		core_code.rotate(180);
-		core_code.rotate(-90);
     }
 
     /**
@@ -72,7 +73,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	
+    	rotate_angle = SmartDashboard.getNumber("rotate_angle");
+    	core_code.rotate(rotate_angle);
+    	SmartDashboard.putNumber("rotate_angle", 0);
     }
     /**
      * This function is called periodically during test mode
